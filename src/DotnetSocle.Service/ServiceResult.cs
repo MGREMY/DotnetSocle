@@ -20,6 +20,5 @@ public class ServiceResult : IServiceResult
 
 public class ServiceResult<T> : ServiceResult, IServiceResult<T>
 {
-    public override bool Success => base.Success && Data is not null;
     public T Data { get; set; }
 }
