@@ -1,9 +1,12 @@
 using System;
+using DotnetSocle.Service.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace DotnetSocle.Service;
 
-public abstract class AbstractService<TQuery, TResult> : IDisposable where TResult : AbstractResult, new()
+public abstract class AbstractService<TQuery, TResult>
+    : IService<TQuery, TResult>
+    where TResult : IServiceResult, new()
 {
     protected readonly ILogger<AbstractService<TQuery, TResult>> Logger;
 

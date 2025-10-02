@@ -1,11 +1,14 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using DotnetSocle.Service.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace DotnetSocle.Service;
 
-public abstract class AbstractServiceAsync<TQuery, TResult> : IDisposable, IAsyncDisposable where TResult : AbstractResult, new()
+public abstract class AbstractServiceAsync<TQuery, TResult>
+    : IServiceAsync<TQuery, TResult>
+    where TResult : IServiceResult, new()
 {
     protected readonly ILogger<AbstractServiceAsync<TQuery, TResult>> Logger;
 

@@ -1,18 +1,17 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
+using DotnetSocle.Service.Contracts;
 
 namespace DotnetSocle.Service;
 
-public abstract class AbstractResult
+public class ServiceResult : IServiceResult
 {
     public virtual bool Success => Errors.Count.Equals(0);
-    public ICollection<Validation> Errors { get; set; } = [];
+    public ICollection<IServiceResultValidation> Errors { get; set; } = [];
 
     public void AddError(string title, string detail)
     {
-        Errors ??= new Collection<Validation>();
-
-        Errors.Add(new Validation
+        Errors.Add(new ServiceValidation
         {
             Title = title,
             Detail = detail,
@@ -20,7 +19,7 @@ public abstract class AbstractResult
     }
 }
 
-public abstract class AbstractResult<T> : AbstractResult
+public class ServiceResult<T> : ServiceResult, IServiceResult<T>
 {
     public override bool Success => base.Success && Data is not null;
     public required T Data { get; set; }
