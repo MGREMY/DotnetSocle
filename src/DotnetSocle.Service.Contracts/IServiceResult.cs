@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DotnetSocle.Service.Contracts;
 
 public interface IServiceResult
